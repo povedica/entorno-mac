@@ -1,126 +1,84 @@
 # entorno-mac
 
-Bootstrap reproducible para **macOS (Apple Silicon)**.  
-Clonas el repo, ejecutas un script, y dejas un Mac nuevo (o reseteado) con un set de trabajo coherente: Homebrew, CLI, apps, dotfiles y defaults.
+Bootstrap de macOS (Apple Silicon) reproducible.
 
-Pensado para reutilizarlo cuando cambies de Mac — y para que cualquiera pueda adaptarlo.
+Un comando deja Homebrew, apps, CLI, dotfiles y defaults listos. Sirve para un Mac nuevo y para que un humano o un agente sepan qué hay y qué tocar.
 
-## Requisitos
-
-- Mac con chip Apple Silicon
-- Cuenta de administrador
-- Conexión a internet
-- [Xcode Command Line Tools](https://developer.apple.com/download/all/) (el script te avisa si faltan)
-
-## Instalación (3 pasos)
+## Uso
 
 ```bash
-# 1. Clonar
-mkdir -p ~/Projects && cd ~/Projects
-git clone https://github.com/povedica/entorno-mac.git
-cd entorno-mac
-
-# 2. Bootstrap (Homebrew + Brewfile + dotfiles + defaults + Node LTS)
+git clone https://github.com/povedica/entorno-mac.git ~/Projects/entorno-mac
+cd ~/Projects/entorno-mac
 chmod +x bootstrap.sh defaults/macos.sh
 ./bootstrap.sh
+```
 
-# 3. Identidad git (obligatorio — no se versiona en el repo)
+Luego (local, no va al repo):
+
+```bash
 git config --global user.name "Tu Nombre"
-git config --global user.email "tu@email.com"
+git config --global user.email "tu@email.com"   # o TU_USUARIO@users.noreply.github.com
 ```
 
-Email privado en GitHub (recomendado):
+Más pasos opcionales: [`CHECKLIST.md`](./CHECKLIST.md).
 
-```bash
-git config --global user.email "TU_USUARIO@users.noreply.github.com"
-```
+## Qué hace `./bootstrap.sh`
 
-Comprueba:
+1. Comprueba Xcode CLT  
+2. Instala Homebrew si falta  
+3. `brew bundle` con el [`Brewfile`](./Brewfile)  
+4. Enlaza dotfiles (`zshrc`, `gitignore_global`, Starship, iTerm)  
+5. Incluye `dotfiles/gitconfig` en tu `~/.gitconfig` (sin `user.*`)  
+6. Aplica [`defaults/macos.sh`](./defaults/macos.sh)  
+7. Instala Node LTS con `fnm` si está disponible  
 
-```bash
-git config --global --get user.name
-git config --global --get user.email
-```
-
-## Después del bootstrap
-
-| Paso | Comando / acción |
-|---|---|
-| SSH | `ssh-keygen -t ed25519 -C "tu@email.com"` → subir la `.pub` a GitHub |
-| GitHub CLI | `gh auth login` |
-| Energía (AC) | `sudo pmset -c sleep 0 && sudo pmset -b sleep 10` |
-| Docker local | `colima start` |
-| Permisos GUI | Abrir Rectangle, Stats, iTerm2, Cursor una vez |
-
-Detalle: [`CHECKLIST.md`](./CHECKLIST.md).
-
-## Qué instala
-
-Definido en [`Brewfile`](./Brewfile) (edítalo a tu gusto):
-
-- **CLI:** git, gh, ripgrep, fd, fzf, bat, eza, starship, zoxide, neovim, tmux…
-- **Runtimes:** fnm (Node), uv (Python), mise
-- **Contenedores:** Colima + Docker CLI
-- **Apps:** Cursor, iTerm2, Firefox, Chrome, Rectangle, Stats…
-
-```bash
-# Reaplicar solo paquetes tras editar el Brewfile
-brew bundle --file=./Brewfile
-```
+Idempotente en lo razonable: se puede volver a ejecutar.
 
 ## Estructura
 
 ```text
-entorno-mac/
-├── bootstrap.sh          # instalación / reaplicación
-├── Brewfile              # fórmulas y casks
-├── defaults/macos.sh     # preferencias del sistema
-├── dotfiles/
-│   ├── zshrc             # → ~/.zshrc (symlink)
-│   ├── gitconfig         # preferencias compartidas (sin name/email)
-│   └── gitignore_global  # → ~/.gitignore_global
-├── docs/baseline-ejemplo.md
-├── CHECKLIST.md
-└── README.md
+bootstrap.sh           # orquestador
+Brewfile               # fórmulas + casks (editar = personalizar)
+defaults/macos.sh      # preferencias del sistema
+dotfiles/
+  zshrc                # shell (Starship, autocomplete, autosuggestions…)
+  gitconfig            # git compartido (sin identidad)
+  gitignore_global
+  starship.toml        # preset tokyo-night
+  iterm2/Clear Dark.json
+CHECKLIST.md           # post-bootstrap manual
+docs/baseline-ejemplo.md
 ```
-
-## Identidad git y privacidad
-
-La identidad **no** vive en este repositorio (es público).
-
-El bootstrap deja en tu máquina un `~/.gitconfig` real que **incluye** la config compartida del repo:
-
-```ini
-[include]
-    path = ~/Projects/entorno-mac/dotfiles/gitconfig
-```
-
-Tú solo añades:
-
-```bash
-git config --global user.name "Tu Nombre"
-git config --global user.email "tu@email.com"
-```
-
-Así `user.*` nunca se sube al remoto por accidente.
-
-**No versionar:** claves SSH, tokens, `.env`, series de hardware, IPs, emails reales. Ver `.gitignore`.
 
 ## Personalizar
 
-1. Comenta/descomenta líneas en `Brewfile`
-2. Ajusta `dotfiles/zshrc` y `defaults/macos.sh`
-3. Vuelve a ejecutar `./bootstrap.sh` (es idempotente en lo razonable)
+| Quieres… | Edita… | Luego |
+|---|---|---|
+| Apps / CLI | `Brewfile` | `brew bundle --file=./Brewfile` |
+| Shell | `dotfiles/zshrc` | nueva pestaña o `source ~/.zshrc` |
+| Prompt | `dotfiles/starship.toml` | nueva pestaña |
+| iTerm | `dotfiles/iterm2/Clear Dark.json` | reiniciar iTerm |
+| macOS UI | `defaults/macos.sh` | `./defaults/macos.sh` |
 
-## Otro Mac / desde cero
+## Privacidad (repo público)
 
-```bash
-git clone https://github.com/povedica/entorno-mac.git ~/Projects/entorno-mac
-cd ~/Projects/entorno-mac && ./bootstrap.sh
-git config --global user.name "Tu Nombre"
-git config --global user.email "tu@email.com"
+**No** versionar: emails reales, claves SSH, tokens, `.env`, series/IP/MAC.
+
+La identidad git vive solo en `~/.gitconfig` local. El repo solo se incluye:
+
+```ini
+[include]
+  path = ~/Projects/entorno-mac/dotfiles/gitconfig
 ```
+
+## Para agentes
+
+- Entrada: `./bootstrap.sh`  
+- Fuente de paquetes: `Brewfile`  
+- Shell: `dotfiles/zshrc` → `~/.zshrc` (symlink)  
+- No escribir secretos en el repo  
+- Tras cambiar dotfiles de iTerm/Starship, reiniciar terminal  
 
 ## Licencia
 
-MIT — úsalo, fórkealo y adáptalo.
+MIT
