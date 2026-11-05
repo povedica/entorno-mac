@@ -12,6 +12,14 @@ fi
 export PATH="${HOME}/.local/bin:${PATH}"
 
 # ---------------------------------------------------------------------------
+# Autocomplete (antes de cualquier compinit / compdef)
+# https://github.com/marlonrichert/zsh-autocomplete
+# ---------------------------------------------------------------------------
+if [[ -r "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]]; then
+  source "$(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+fi
+
+# ---------------------------------------------------------------------------
 # Historia
 # ---------------------------------------------------------------------------
 HISTFILE="${HOME}/.zsh_history"
@@ -19,11 +27,9 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE EXTENDED_HISTORY
 
-# ---------------------------------------------------------------------------
-# Completado
-# ---------------------------------------------------------------------------
-autoload -Uz compinit
-compinit -C
+# cdr / chpwd-recent-dirs (zsh-autocomplete lo usa)
+mkdir -p "${HOME}/.local/share/zsh"
+: >> "${HOME}/.local/share/zsh/chpwd-recent-dirs"
 
 # ---------------------------------------------------------------------------
 # fnm (Node)
@@ -44,9 +50,9 @@ if command -v zoxide >/dev/null 2>&1; then
 fi
 
 if command -v fzf >/dev/null 2>&1; then
+  # Solo keybindings: el completion de fzf choca con zsh-autocomplete
   # shellcheck disable=SC1090
   [[ -f "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh" ]] && source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
-  [[ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ]] && source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
 fi
 
 # ---------------------------------------------------------------------------
@@ -67,3 +73,14 @@ alias projects='cd ~/Projects'
 export EDITOR="${EDITOR:-nvim}"
 export VISUAL="${VISUAL:-$EDITOR}"
 export LANG="${LANG:-es_ES.UTF-8}"
+
+# ---------------------------------------------------------------------------
+# Autosuggestions (al final)
+# https://github.com/zsh-users/zsh-autosuggestions
+# ---------------------------------------------------------------------------
+if [[ -r "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  # Aceptar sugerencia con → o fin de línea
+  bindkey '^[[C' forward-char
+  bindkey '^E' autosuggest-accept
+fi
