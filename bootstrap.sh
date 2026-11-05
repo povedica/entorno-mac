@@ -163,6 +163,16 @@ post_runtimes() {
   fi
 }
 
+
+install_cursor_extensions() {
+  log "Extensiones Cursor"
+  if [[ -x "${ROOT}/scripts/install-cursor-extensions.sh" ]]; then
+    bash "${ROOT}/scripts/install-cursor-extensions.sh" || warn "extensiones Cursor: revisar a mano"
+  else
+    warn "script de extensiones no encontrado"
+  fi
+}
+
 print_checklist() {
   log "Checklist manual (ver CHECKLIST.md)"
   cat <<'EOF'
@@ -185,6 +195,7 @@ main() {
   install_dotfiles
   apply_defaults
   post_runtimes
+  install_cursor_extensions
   print_checklist
   log "Listo"
 }

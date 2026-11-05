@@ -67,18 +67,28 @@ softwareupdate --install-rosetta --agree-to-license
 ## Estructura
 
 ```text
-bootstrap.sh           # orquestador
-Brewfile               # fórmulas + casks
-defaults/macos.sh      # preferencias del sistema
+bootstrap.sh
+Brewfile
+defaults/macos.sh
 dotfiles/
-  zshrc
-  aliases.zsh          # set mínimo propio
-  gitconfig            # sin identidad personal
-  gitignore_global
-  starship.toml
-  iterm2/Clear Dark.json
+  zshrc, aliases.zsh, gitconfig, gitignore_global
+  starship.toml, iterm2/Clear Dark.json
+  cursor-extensions.txt
+scripts/install-cursor-extensions.sh
 CHECKLIST.md
 docs/baseline-ejemplo.md
+```
+
+## Apps incluidas (Brewfile)
+
+Navegadores: Firefox, Chrome, **Comet**.  
+Comms: WhatsApp, Telegram.  
+Notas/sync: Obsidian, Syncthing (`syncthing-app`).  
+Dev: Cursor, iTerm2, **Codex CLI** (`codex`) + extensión IDE `openai.chatgpt`.
+
+```bash
+./scripts/install-cursor-extensions.sh   # Codex en Cursor
+codex                                    # login CLI la 1ª vez
 ```
 
 ## Personalizar
@@ -86,6 +96,7 @@ docs/baseline-ejemplo.md
 | Quieres… | Edita… | Luego |
 |---|---|---|
 | Apps / CLI | `Brewfile` | `brew bundle --file=./Brewfile` |
+| Extensiones Cursor | `dotfiles/cursor-extensions.txt` | `./scripts/install-cursor-extensions.sh` |
 | Shell / alias | `dotfiles/zshrc`, `aliases.zsh` | `reload` o nueva pestaña |
 | Prompt | `dotfiles/starship.toml` | nueva pestaña |
 | iTerm | `dotfiles/iterm2/Clear Dark.json` | reiniciar iTerm |

@@ -35,10 +35,13 @@ sudo pmset -b sleep 10
 
 ## 5. Apps (permisos)
 
-Abrir una vez: **Rectangle**, **Stats**, **iTerm2**, **Cursor**.
+Abrir una vez: **Rectangle**, **Stats**, **iTerm2**, **Cursor**, **Comet**, **WhatsApp**, **Telegram**, **Obsidian**, **Syncthing**.
 
 - Rectangle: modo Recommended; si choca con el tiling de macOS, desactiva el del sistema.
 - iTerm: perfil Clear Dark + Nerd Font (lo deja el bootstrap).
+- Syncthing: en Mac es `syncthing-app`; en Android suele usarse Syncthing-Fork.
+- Codex IDE: extensión `openai.chatgpt` en Cursor (`./scripts/install-cursor-extensions.sh`).
+- Codex CLI: `codex` (login la primera vez).
 
 ## 6. Docker (Colima)
 

@@ -57,6 +57,12 @@ cask "rectangle"          # ventanas con atajos
 cask "iterm2"
 cask "firefox"
 cask "google-chrome"
+cask "comet"              # navegador AI (Perplexity)
+cask "whatsapp"
+cask "telegram"
+cask "obsidian"
+cask "syncthing-app"      # sync (en Android suele usarse Syncthing-Fork)
+cask "codex"              # OpenAI Codex CLI (`codex`)
 cask "appcleaner"
 cask "the-unarchiver"
 cask "stats"              # menú: CPU/RAM/red
@@ -68,7 +74,6 @@ cask "stats"              # menú: CPU/RAM/red
 # cask "slack"
 # cask "spotify"
 # cask "1password"
-# cask "obsidian"
 # cask "figma"
 
 # ---------------------------------------------------------------------------

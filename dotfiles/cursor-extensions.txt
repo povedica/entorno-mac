@@ -1,0 +1,3 @@
+# Extensiones Cursor/VS Code (una por línea).
+# Instalar: ./scripts/install-cursor-extensions.sh
+openai.chatgpt
