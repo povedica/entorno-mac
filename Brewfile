@@ -41,7 +41,8 @@ brew "uv"    # Python (uv python install 3.13)
 brew "mise"  # opcional: gestor unificado (node/python/go/…)
 
 # ---------------------------------------------------------------------------
-# Contenedores (elige uno: Colima ligero o Docker Desktop)
+# Contenedores — Colima (ligero). Alternativa GUI: cask docker-desktop
+# Uso: colima start | status | stop
 # ---------------------------------------------------------------------------
 brew "colima"
 brew "docker"

@@ -166,13 +166,14 @@ post_runtimes() {
 print_checklist() {
   log "Checklist manual (ver CHECKLIST.md)"
   cat <<'EOF'
-    [ ] git config --global user.name "Tu Nombre"
-    [ ] git config --global user.email "tu@email.com"
-    [ ] ssh-keygen -t ed25519 -C "tu@email.com" && pbcopy < ~/.ssh/id_ed25519.pub
+    [ ] git config --global user.name / user.email
     [ ] gh auth login
-    [ ] Abrir Cursor / iTerm2 / Rectangle una vez (permisos)
-    [ ] colima start   # si usas Docker vía Colima
-    [ ] Cerrar sesión o reiniciar para aplicar todos los defaults
+    [ ] SSH (opcional si usas HTTPS + gh)
+    [ ] sudo pmset -c sleep 0
+    [ ] Abrir Rectangle / Stats / iTerm2 / Cursor (permisos)
+    [ ] colima start
+    [ ] Rosetta (opcional): softwareupdate --install-rosetta --agree-to-license
+    [ ] Logout o reinicio (asentar defaults)
 EOF
 }
 
