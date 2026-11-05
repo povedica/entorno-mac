@@ -42,6 +42,7 @@ Brewfile               # fórmulas + casks (editar = personalizar)
 defaults/macos.sh      # preferencias del sistema
 dotfiles/
   zshrc                # shell (Starship, autocomplete, autosuggestions…)
+  aliases.zsh          # set mínimo de alias (propio)
   gitconfig            # git compartido (sin identidad)
   gitignore_global
   starship.toml        # preset tokyo-night
