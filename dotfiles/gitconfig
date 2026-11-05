@@ -1,0 +1,43 @@
+# Configuración git compartida (sin identidad personal).
+# Se incluye desde ~/.gitconfig vía:
+#   git config --global include.path "/ruta/a/entorno-mac/dotfiles/gitconfig"
+#
+# La identidad (name/email) vive SOLO en tu ~/.gitconfig local, no en este repo.
+
+[core]
+	editor = nvim
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+	pager = bat --paging=always
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = simple
+
+[fetch]
+	prune = true
+
+[rebase]
+	autoStash = true
+
+[color]
+	ui = auto
+
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	ci = commit
+	last = log -1 HEAD
+	lg = log --oneline --graph --decorate -20
+	unstage = reset HEAD --
+	amend = commit --amend --no-edit
+
+[credential]
+	helper = osxkeychain

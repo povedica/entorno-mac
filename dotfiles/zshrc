@@ -1,0 +1,69 @@
+# ~/.zshrc — gestionado por ~/Projects/entorno-mac
+# Editar en el repo y re-lanzar shell (o: source ~/.zshrc)
+
+# ---------------------------------------------------------------------------
+# Homebrew (por si la sesión no cargó .zprofile)
+# ---------------------------------------------------------------------------
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+fi
+
+# Cursor Agent / bins locales
+export PATH="${HOME}/.local/bin:${PATH}"
+
+# ---------------------------------------------------------------------------
+# Historia
+# ---------------------------------------------------------------------------
+HISTFILE="${HOME}/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE EXTENDED_HISTORY
+
+# ---------------------------------------------------------------------------
+# Completado
+# ---------------------------------------------------------------------------
+autoload -Uz compinit
+compinit -C
+
+# ---------------------------------------------------------------------------
+# fnm (Node)
+# ---------------------------------------------------------------------------
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
+# ---------------------------------------------------------------------------
+# Herramientas
+# ---------------------------------------------------------------------------
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+  # shellcheck disable=SC1090
+  [[ -f "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh" ]] && source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  [[ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ]] && source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+fi
+
+# ---------------------------------------------------------------------------
+# Aliases
+# ---------------------------------------------------------------------------
+alias ll='eza -lah --group-directories-first'
+alias la='eza -la --group-directories-first'
+alias ls='eza --group-directories-first'
+alias cat='bat --paging=never'
+alias g='git'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias projects='cd ~/Projects'
+
+# ---------------------------------------------------------------------------
+# Entorno
+# ---------------------------------------------------------------------------
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="${VISUAL:-$EDITOR}"
+export LANG="${LANG:-es_ES.UTF-8}"

@@ -1,0 +1,20 @@
+# Secretos y estado local
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+!*.pub.example
+
+# Backups de dotfiles
+*.bak
+*.local
+
+# macOS
+.DS_Store
+
+# Logs / caches de bootstrap
+.bootstrap-cache/
+*.log
