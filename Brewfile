@@ -63,6 +63,8 @@ cask "telegram"
 cask "obsidian"
 cask "syncthing-app"      # sync (en Android suele usarse Syncthing-Fork)
 cask "codex"              # OpenAI Codex CLI (`codex`)
+cask "1password"
+cask "1password-cli"      # `op` en terminal
 cask "appcleaner"
 cask "the-unarchiver"
 cask "stats"              # menú: CPU/RAM/red
