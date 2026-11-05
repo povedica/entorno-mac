@@ -30,6 +30,8 @@ brew "mas"
 brew "starship"
 brew "zoxide"
 brew "shellcheck"
+brew "zsh-autosuggestions"
+brew "zsh-autocomplete"
 
 # ---------------------------------------------------------------------------
 # Runtimes / gestores
@@ -73,3 +75,6 @@ cask "stats"              # menú: CPU/RAM/red
 # ---------------------------------------------------------------------------
 # mas "Xcode", id: 497799835
 # mas "Keynote", id: 409183694
+
+# Fuentes (iconos Starship / Nerd Font)
+cask "font-jetbrains-mono-nerd-font"

@@ -105,11 +105,30 @@ install_git_include() {
   fi
 }
 
+install_iterm_profile() {
+  local src="${ROOT}/dotfiles/iterm2/Clear Dark.json"
+  local dest_dir="${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
+  [[ -f "$src" ]] || return 0
+  mkdir -p "$dest_dir"
+  ln -sfn "$src" "${dest_dir}/Clear Dark.json"
+  defaults write com.googlecode.iterm2 "Default Bookmark Guid" -string "entorno-mac-clear-dark"
+  ok "iTerm2 perfil Clear Dark (default)"
+}
+
+install_starship_config() {
+  local src="${ROOT}/dotfiles/starship.toml"
+  [[ -f "$src" ]] || return 0
+  mkdir -p "${HOME}/.config"
+  link_dotfile "$src" "${HOME}/.config/starship.toml"
+}
+
 install_dotfiles() {
   log "Dotfiles"
   link_dotfile "${ROOT}/dotfiles/zshrc" "${HOME}/.zshrc"
   link_dotfile "${ROOT}/dotfiles/gitignore_global" "${HOME}/.gitignore_global"
   install_git_include
+  install_iterm_profile
+  install_starship_config
 }
 
 # ---------------------------------------------------------------------------
