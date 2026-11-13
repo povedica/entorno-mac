@@ -80,8 +80,8 @@ fi
 # ---------------------------------------------------------------------------
 # Screenshots
 # ---------------------------------------------------------------------------
-mkdir -p "${HOME}/Desktop/Screenshots"
-defaults write com.apple.screencapture location -string "${HOME}/Desktop/Screenshots"
+mkdir -p "${HOME}/Pictures/Screenshots"
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
 defaults write com.apple.screencapture type -string "png"
 defaults write com.apple.screencapture disable-shadow -bool true
 
