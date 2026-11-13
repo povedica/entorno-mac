@@ -41,6 +41,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # ---------------------------------------------------------------------------
 # Finder
 # ---------------------------------------------------------------------------
+# Archivos ocultos (punto / .DS_Store / etc.)
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"   # lista
