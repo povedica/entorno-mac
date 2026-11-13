@@ -83,6 +83,7 @@ docs/baseline-ejemplo.md
 
 Navegadores: Firefox, Chrome, **Comet**.  
 Comms: WhatsApp, Telegram, Microsoft Teams.  
+Media: Spotify.  
 Notas/sync: Obsidian, Syncthing (`syncthing-app`).  
 Dev: Cursor, iTerm2, **Codex CLI** (`codex`) + extensión IDE `openai.chatgpt`.
 

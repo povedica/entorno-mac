@@ -62,6 +62,7 @@ cask "comet"              # navegador AI (Perplexity)
 cask "whatsapp"
 cask "telegram"
 cask "microsoft-teams"
+cask "spotify"
 cask "obsidian"
 cask "syncthing-app"      # sync (en Android suele usarse Syncthing-Fork)
 cask "codex"              # OpenAI Codex CLI (`codex`)
@@ -78,7 +79,6 @@ cask "stats"              # menú: CPU/RAM/red
 # cask "orbstack"         # alternativa a Colima/Docker Desktop
 # cask "docker-desktop"
 # cask "slack"
-# cask "spotify"
 # cask "1password"
 # cask "figma"
 
