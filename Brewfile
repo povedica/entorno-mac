@@ -30,6 +30,7 @@ brew "mas"
 brew "starship"
 brew "zoxide"
 brew "shellcheck"
+brew "age"           # cifrado de ficheros (age/age-keygen)
 brew "zsh-autosuggestions"
 brew "zsh-autocomplete"
 
