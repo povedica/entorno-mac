@@ -82,7 +82,7 @@ docs/baseline-ejemplo.md
 ## Apps incluidas (Brewfile)
 
 Navegadores: Firefox, Chrome, **Comet**.  
-Comms: WhatsApp, Telegram.  
+Comms: WhatsApp, Telegram, Microsoft Teams.  
 Notas/sync: Obsidian, Syncthing (`syncthing-app`).  
 Dev: Cursor, iTerm2, **Codex CLI** (`codex`) + extensión IDE `openai.chatgpt`.
 
